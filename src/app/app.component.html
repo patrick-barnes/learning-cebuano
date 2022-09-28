@@ -1,0 +1,25 @@
+<h1>My Cebuano App</h1>
+
+<div *ngIf="!isInitialized">
+  <div>Loading...</div>
+</div>
+<div *ngIf="isInitialized">
+  <p>Search:
+    <input type="text" [(ngModel)]="searchText" />
+  <p>
+    <input type="checkbox" [(ngModel)]="doE"> English
+    <span style="width:8em;">&nbsp;</span>
+    <input type="checkbox" [(ngModel)]="doC"> Cebuano
+    <span style="width:8em;">&nbsp;</span>
+    <input type="checkbox" [(ngModel)]="examplesOnly"> Examples Only
+    <span style="width:8em;">&nbsp;</span>
+    <input type="checkbox" [(ngModel)]="wholeWordOnly"> Whole Word Only
+  </p>
+  <div *ngFor="let r of searchResults">
+    <i>{{r.root}}<!--: {{r.rootPreview}}--></i>
+    <ul>
+      <li>{{r.c}}</li>
+      <li>{{r.e}}</li>
+    </ul>
+  </div>
+</div>
