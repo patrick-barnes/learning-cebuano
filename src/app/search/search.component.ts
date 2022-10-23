@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
-import { DataService } from './data.service';
+import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'app-search',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.scss']
 })
-export class AppComponent {
+export class SearchComponent implements OnInit {
 
   public title = 'cebuano';
   public dictionary: Record<string, any> = {};
@@ -35,11 +35,15 @@ export class AppComponent {
       return null;
     }
     let s = text.toLowerCase();
+    s = s.replace(/[áâàā]/g,  'a'); // ăǎǟǡȃ
+    s = s.replace(/[éêèē]/g,  'e');
+    s = s.replace(/[íîìī]/g,  'i');
+    s = s.replace(/[óôòō]/g,  'o');
+    s = s.replace(/[úûùūū́]/g, 'u');
+    s = s.replace(/[ẃŵ]/g,    'w');
+    s = s.replace(/[ýŷȳ]/g,   'y');
     s = s.replace(/e/g, 'i');
     s = s.replace(/o/g, 'u');
-    s = s.replace(/[áâàā]/g, 'a'); // ăǎǟǡȃ
-    s = s.replace(/[íì]/g, 'i');
-    s = s.replace(/[úūū́]/g, 'u');
     return s;
   }
 
@@ -124,8 +128,35 @@ export class AppComponent {
     }
   }
 
-  public onSearch($event: any) {
-    console.log("onSearch(): $event:", $event);
+  // public onSearch($event: any) {
+  //   console.log("onSearch(): $event:", $event);
+  //   this.doSearch(this.searchText, this.doC, this.doE, this.examplesOnly, this.wholeWordOnly);
+  // }
+
+  // public onEnter($event: any) {
+  //   console.log("onEnter(): $event:", $event);
+  //   this.doSearch(this.searchText, this.doC, this.doE, this.examplesOnly, this.wholeWordOnly);
+  // }
+
+  public onForceSearch() {
+    console.log("onForceSearch()");
     this.doSearch(this.searchText, this.doC, this.doE, this.examplesOnly, this.wholeWordOnly);
   }
+
+  public onChangeInput($event: any) {
+    console.log("onInputChange(): $event:", $event);
+    if (this.canAutoSearch()) {
+      this.doSearch(this.searchText, this.doC, this.doE, this.examplesOnly, this.wholeWordOnly);
+    } else {
+      this.searchResults = [];
+    }
+  }
+
+  public canAutoSearch(): boolean {
+    if (this.searchText.length >= 4) {
+      return true;
+    }
+    return false;
+  }
+
 }

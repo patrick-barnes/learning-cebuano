@@ -1,0 +1,29 @@
+<div style="padding:20px; font-family:sans-serif; background-color:#80ffc0;">
+
+    <h1>Cebuano Search</h1>
+  
+    <div *ngIf="!isInitialized">
+      <div>Loading...</div>
+    </div>
+    <div *ngIf="isInitialized">
+      <p>Search:
+        <input (input)="onChangeInput($event)" type="text" [(ngModel)]="searchText" /><!-- (keydown)="onKeyDown($event)" -->
+        <button *ngIf="!canAutoSearch()" (click)="onForceSearch()">Force Search</button>
+      <p>
+        <input (change)="onChangeInput($event)" type="checkbox" [(ngModel)]="doE"> English
+        <span style="width:8em;">&nbsp;</span>
+        <input (change)="onChangeInput($event)" type="checkbox" [(ngModel)]="doC"> Cebuano
+        <span style="width:8em;">&nbsp;</span>
+        <input (change)="onChangeInput($event)" type="checkbox" [(ngModel)]="examplesOnly"> Examples Only
+        <span style="width:8em;">&nbsp;</span>
+        <input (change)="onChangeInput($event)" type="checkbox" [(ngModel)]="wholeWordOnly"> Whole Word Only
+      </p>
+      <div *ngFor="let r of searchResults" style="margin-bottom:1em; background-color:white; border-radius:8px; padding:8px; ">
+        <div><span style="color:#808080">c</span> {{r.c}}</div>
+        <div><span style="color:#808080">e</span> {{r.e}}</div>
+        <div><span style="color:#808080"><i>see: {{r.root}}</i></span></div>
+      </div>
+    </div>
+  
+  </div>
+  

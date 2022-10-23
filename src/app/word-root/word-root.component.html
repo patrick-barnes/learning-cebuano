@@ -1,0 +1,51 @@
+<div style="padding:20px; font-family:sans-serif; background-color:#80ffc0;">
+    <h1>Cebuano Dictionary</h1>
+    <div *ngIf="!isInitialized">
+        <div>Loading...</div>
+        <h2 style="color: #4040f0; background-color:white; border-radius:8px; padding:8px; ">{{root}}</h2>
+    </div>
+    <div *ngIf="isInitialized">
+        <table style="text-align:left; background-color:white; margin-bottom:1em; border-radius:8px; padding:8px; border-collapse: inherit; border-spacing: 10px 10px;">
+            <thead>
+                <!--
+                <tr style="font-weight:bold;">
+                    <th>form</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th>meaning</th>
+                </tr>
+                -->
+            </thead>
+            <tbody>
+                <tr style="vertical-align: top; padding:3em;">
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <span style="font-size:x-large; font-weight: bold; font-style:italic; color: #4040f0;">{{root}}</span>
+                    </td>
+                </tr>
+                <tr *ngFor="let e of entries" style="vertical-align: top; padding:3em;">
+                    <!--<td><span style="font-weight:bold">{{nice(e.form)}}</span></td>-->
+                    <td><span style="font-weight:bold; color:#c04040">{{nice(e.pos)}}</span></td>
+                    <td><span style="font-weight:bold; color:#4040f0;">{{nice(e.number)}}</span></td>
+                    <td>
+                        <div *ngIf="nice(e.form)">
+                            <span style="font-weight:bold; font-style:italic; color:#4040f0;">{{nice(e.form)}}</span>
+                        </div>
+                        <div *ngIf="nice(e.itype)">
+                            <span style="color:#c04040;">{{nice(e.itype)}}</span>
+                        </div>
+                        <div>
+                            <span style="font-weight:bold">{{e.meaning}}</span>
+                        </div>
+                        <div *ngFor="let ex of e.examples" style="padding-left: 1.0em; padding-top: 0.5em;">
+                            <div style="font-style:italic">{{ex.c}}</div>
+                            <div>{{ex.e}}</div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
