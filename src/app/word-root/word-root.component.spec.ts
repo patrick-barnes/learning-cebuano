@@ -1,23 +1,12 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { describe, expect, it } from 'vitest';
+import { DataService } from '../data.service';
 import { WordRootComponent } from './word-root.component';
 
 describe('WordRootComponent', () => {
-  let component: WordRootComponent;
-  let fixture: ComponentFixture<WordRootComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ WordRootComponent ]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(WordRootComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('nice() blanks out placeholder values but leaves real text untouched', () => {
+    const component = new WordRootComponent({} as DataService);
+    expect(component.nice('-')).toBe('');
+    expect(component.nice('0')).toBe('');
+    expect(component.nice('dakù')).toBe('dakù');
   });
 });

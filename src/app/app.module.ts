@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { WordRootComponent } from './word-root/word-root.component';
@@ -15,5 +15,5 @@ import { SearchComponent } from './search/search.component';
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         FormsModule,
-        AppRoutingModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
+        AppRoutingModule], providers: [provideHttpClient(withXhr(), withInterceptorsFromDi())] })
 export class AppModule { }

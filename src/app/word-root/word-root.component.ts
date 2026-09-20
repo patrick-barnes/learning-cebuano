@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { DataService } from '../data.service';
 
 @Component({
     selector: 'app-word-root',
     templateUrl: './word-root.component.html',
     styleUrls: ['./word-root.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class WordRootComponent implements OnInit {
