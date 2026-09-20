@@ -57,6 +57,14 @@ export class SearchComponent implements OnInit {
     return s;
   }
 
+  // escapes regex metacharacters so user input can be safely embedded in a RegExp pattern
+  private escapeForRegExp(text: string | null): string | null {
+    if (text == null) {
+      return null;
+    }
+    return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
   private decorate() {
     for (let root in this.dictionary) {
       let entries = this.dictionary[root];
@@ -90,16 +98,6 @@ export class SearchComponent implements OnInit {
     this.searchResults = []; // clear
     for (let root in this.dictionary) {
       let entries = this.dictionary[root];
-      // let mainEntry = entries[0];
-      // let root2 = mainEntry.root2;
-      // if (doC && root2.includes(sc)) {
-      //   console.log("[C] [" + root + "] " + root + " => " + mainEntry.meaning + " ...");
-      //   this.addSearchResult(root, mainEntry.meaning + " ...", root, mainEntry.meaning);
-      // }
-      // if (doE && mainEntry.meaning.includes(se)) {
-      //   console.log("[C] [" + root + "] " + root + " => " + mainEntry.meaning + " ...");
-      //   this.addSearchResult(root, mainEntry.meaning + " ...", root, mainEntry.meaning);
-      // }
       for (let entry of entries) {
         if (!examplesOnly && doC && entry.form2 && entry.form2.includes(sc)) {
           this.addSearchResult(root, this.dictionary[root][0].meaning + " ...", entry.form, entry.meaning);
@@ -110,10 +108,10 @@ export class SearchComponent implements OnInit {
         if (entry.examples) {
           for (let example of entry.examples) {
             if (wholeWordOnly) {
-              if (doE && example.e2 && example.e2.match('\\b' + se + '\\b')) {
+              if (doE && example.e2 && example.e2.match('\\b' + this.escapeForRegExp(se) + '\\b')) {
                 this.addSearchResult(root, this.dictionary[root][0].meaning + " ...", example.c, example.e);
               }
-              if (doC && example.c2 && example.c2.match('\\b' + sc + '\\b')) {
+              if (doC && example.c2 && example.c2.match('\\b' + this.escapeForRegExp(sc) + '\\b')) {
                 this.addSearchResult(root, this.dictionary[root][0].meaning + " ...", example.c, example.e);
               }
             } else {
@@ -129,16 +127,6 @@ export class SearchComponent implements OnInit {
       }
     }
   }
-
-  // public onSearch($event: any) {
-  //   console.log("onSearch(): $event:", $event);
-  //   this.doSearch(this.searchText, this.doC, this.doE, this.examplesOnly, this.wholeWordOnly);
-  // }
-
-  // public onEnter($event: any) {
-  //   console.log("onEnter(): $event:", $event);
-  //   this.doSearch(this.searchText, this.doC, this.doE, this.examplesOnly, this.wholeWordOnly);
-  // }
 
   public onForceSearch() {
     console.log("onForceSearch()");
