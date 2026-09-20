@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "cebuano:build:production"
+              "buildTarget": "cebuano:build:production"
             },
             "development": {
-              "browserTarget": "cebuano:build:development"
+              "buildTarget": "cebuano:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "cebuano:build"
+            "buildTarget": "cebuano:build"
           }
         },
         "test": {
