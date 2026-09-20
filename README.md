@@ -6,10 +6,10 @@ Published to: [https://pjbarnes.dev/learning-cebuano](pjbarnes.dev/learning-cebu
 
 # local development
 
-Use Node 16:
+Use Node 22 (see `.nvmrc`):
 
-- `nvm install 16.20.2`
-- `nvm use 16.20.2`
+- `nvm install 22.12.0`
+- `nvm use 22.12.0`
 
 Build:
 
@@ -18,6 +18,10 @@ Build:
 Run:
 
 - `ng serve`
+
+Test:
+
+- `npm test` (runs unit tests directly via Vitest)
 
 Publish:
 
