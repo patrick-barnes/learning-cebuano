@@ -1,1 +1,1 @@
-ng build --base-href https://patrick-barnes.github.io/learning-cebuano/ --output-path docs
+ng build --base-href https://pjbarnes.dev/learning-cebuano/ --output-path docs
